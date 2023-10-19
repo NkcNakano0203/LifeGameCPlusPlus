@@ -18,3 +18,8 @@ static bool TryStringToInt(const std::string& value, int& result)
 		return false;
 	}
 }
+
+static int PositionToIndex(int y, int x, const int WidthSize)
+{
+	return y * WidthSize + x;
+}

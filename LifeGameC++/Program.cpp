@@ -44,9 +44,10 @@ void IntToBool(const vector<int> ints, const int Height, const int Width, vector
 		for (int x = 0; x < Width; x++)
 		{
 			// 0,1以外が入っていたら終了
-			if (!(ints.at(y * x) == 0 || ints.at(y * x) == 1)) return;
+			if (!(ints.at(PositionToIndex(y, x, Width)) == 0
+				|| ints.at(PositionToIndex(y, x, Width)) == 1)) return;
 
-			cellStates.at(y * x) = ints.at(y * x) == 1;
+			cellStates.at(PositionToIndex(y, x, Width)) = ints.at(PositionToIndex(y, x, Width)) == 1;
 		}
 	}
 

@@ -6,7 +6,7 @@
 class LifeGame
 {
 public:
-	LifeGame(const int heightSize, const int widthSize);
+	LifeGame(const unsigned int heightSize, const unsigned int widthSize);
 	std::vector<bool> NextGeneration();
 	void RenderState();
 
@@ -14,6 +14,6 @@ public:
 private:
 	bool IsAlive(int y, int x);
 
-	int heightSize;
-	int widthSize;
+	unsigned int heightSize;
+	unsigned int widthSize;
 };
