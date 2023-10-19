@@ -1,26 +1,19 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
+#include <vector>
 
 class LifeGame
 {
 public:
-	LifeGame(int heightSize, int widthSize);
-	bool* NextGeneration();
+	LifeGame(const int heightSize, const int widthSize);
+	std::vector<bool> NextGeneration();
 	void RenderState();
 
-	bool aliveCells[1][1];
+	std::vector<bool> aliveCells;
 private:
 	bool IsAlive(int y, int x);
 
-	int32_t heightSize;
-	int32_t widthSize;
+	int heightSize;
+	int widthSize;
 };
-
-LifeGame::LifeGame(int heightSize, int widthSize)
-{
-	this->heightSize = heightSize;
-	this->widthSize = widthSize;
-
-	aliveCells[heightSize][widthSize];
-}
