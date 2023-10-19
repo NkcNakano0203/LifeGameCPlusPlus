@@ -1,5 +1,4 @@
 #include "LifeGame.h"
-
 using namespace std;
 
 LifeGame::LifeGame(const int heightSize, const int widthSize)
@@ -21,14 +20,15 @@ bool LifeGame::IsAlive(int y, int x)
 	int lifeCount = 0;
 
 	// 自分含めた周囲9マスのcellの生存状態を確認する
-	for (int i = y - 1; i < y + 1; i++)
+	for (int i = y - 1; i <= y + 1; ++i)
 	{
 		// 0 <= i < heightSize
-		if ((unsigned int)i > heightSize) continue;
-		for (int j = x - 1; j < x + 1; j++)
+		if ((unsigned int)i >= heightSize) continue;
+
+		for (int j = x - 1; j <= x + 1; ++j)
 		{
 			// 0 <= j < widthSize
-			if ((unsigned int)j > widthSize) continue;
+			if ((unsigned int)j >= widthSize) continue;
 
 			if (!aliveCells.at(i * j)) continue;
 			lifeCount++;
