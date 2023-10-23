@@ -11,12 +11,6 @@ LifeGame::LifeGame(const unsigned int heightSize, const unsigned int widthSize)
 	aliveCells.resize(heightSize * widthSize);
 }
 
-/// <summary>
-/// cell‚Ì¶€‚ğ”»’è‚·‚é
-/// </summary>
-/// <param name="y">c‚ÌÀ•W</param>
-/// <param name="x">‰¡‚ÌÀ•W</param>
-/// <returns>¶‚«‚Ä‚¢‚é‚È‚çTrue</returns>
 bool LifeGame::IsAlive(int y, int x)
 {
 	int lifeCount = 0;
@@ -53,10 +47,6 @@ bool LifeGame::IsAlive(int y, int x)
 	}
 }
 
-/// <summary>
-/// ¢‘ã‚ğ‚P‚Âi‚ß‚é
-/// </summary>
-/// <returns>Ÿ¢‘ã‚Ìcell‚Ìó‘Ô</returns>
 vector<bool> LifeGame::NextGeneration()
 {
 	vector<bool> newGene(heightSize * widthSize);
@@ -70,10 +60,6 @@ vector<bool> LifeGame::NextGeneration()
 	return newGene;
 }
 
-/// <summary>
-/// cell‚Ìó‘Ô‚ğ•`‰æ‚·‚é
-/// ¶‘¶:¡ €–S: 
-/// </summary>
 void LifeGame::RenderState()
 {
 	for (int y = 0; y < heightSize; y++)
