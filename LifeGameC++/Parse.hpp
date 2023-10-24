@@ -1,5 +1,6 @@
 #include <string>
 #include <stdexcept>
+#include <vector>
 
 /// <summary>
 /// string•¶š—ñ‚ğint‚É•ÏŠ·
@@ -38,21 +39,20 @@ static int PositionToIndex(int y, int x, const int WidthSize)
 /// <param name="Height">c</param>
 /// <param name="Width">‰¡</param>
 /// <param name="result"></param>
-static void IntToBool(const vector<int> ints, const int Height, const int Width, vector<bool>& result)
+static void IntToBool(const std::vector<int8_t> BitFlags, const int Height, const int Width, std::vector<bool>& result)
 {
-	vector<bool> bools(Height * Width);
+	std::vector<bool> bools(Height * Width);
 
 	for (int y = 0; y < Height; y++)
 	{
 		for (int x = 0; x < Width; x++)
 		{
 			// 0,1ˆÈŠO‚ª“ü‚Á‚Ä‚¢‚½‚çI—¹
-			if (!(ints.at(PositionToIndex(y, x, Width)) == 0
-				|| ints.at(PositionToIndex(y, x, Width)) == 1)) return;
+			if (!(BitFlags.at(PositionToIndex(y, x, Width)) == 0
+				|| BitFlags.at(PositionToIndex(y, x, Width)) == 1)) return;
 
-			bools.at(PositionToIndex(y, x, Width)) = ints.at(PositionToIndex(y, x, Width)) == 1;
+			bools.at(PositionToIndex(y, x, Width)) = BitFlags.at(PositionToIndex(y, x, Width)) == 1;
 		}
 	}
-
 	result = bools;
 }

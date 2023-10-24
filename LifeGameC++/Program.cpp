@@ -7,29 +7,28 @@
 
 using namespace std;
 
-vector<int> InitSetting(int& height, int& width);
+vector<int8_t> InitSetting(int& height, int& width);
 
 int main()
 {
-	vector<int> init;
 	int height;
 	int width;
 	int generationCount = 0;
-
-	init = InitSetting(height, width);
+	auto initInstance = InitSetting(height, width);
+	vector<int8_t>& initRef = initInstance;
 
 	mt19937 mt{ std::random_device{}() };
 	uniform_int_distribution<int> dist(0, 1);
 
-	for (int i = 0; i < init.size(); i++)
+	for (int i = 0; i < initRef.size(); i++)
 	{
 		// ランダムに0,1を代入する
-		init.at(i) = dist(mt);
-		cout << init.at(i);
+		initRef.at(i) = dist(mt);
+		cout << initRef.at(i);
 	}
 
 	LifeGame* lifeGame = new LifeGame(height, width);
-	IntToBool(init, height, width, lifeGame->aliveCells);
+	IntToBool(initRef, height, width, lifeGame->aliveCells);
 
 	// 自動で世代を進める
 	while (true)
@@ -53,7 +52,7 @@ int main()
 /// <param name="height">縦</param>
 /// <param name="width">横</param>
 /// <returns>(height*width)</returns>
-vector<int> InitSetting(int& height, int& width)
+vector<int8_t> InitSetting(int& height, int& width)
 {
 	while (true)
 	{
@@ -71,6 +70,6 @@ vector<int> InitSetting(int& height, int& width)
 		cout << "数字を入力してね！" << endl;
 	}
 
-	vector<int> arr(height * width);
+	vector<int8_t> arr(height * width);
 	return	arr;
 }
