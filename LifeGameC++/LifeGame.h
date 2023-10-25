@@ -11,12 +11,14 @@ public:
 	/// ¢‘ã‚ğ‚P‚Âi‚ß‚é
 	/// </summary>
 	/// <returns>Ÿ¢‘ã‚Ìcell‚Ìó‘Ô</returns>
-	std::vector<bool> NextGeneration();
+	void NextGeneration();
+	/// <returns>ƒZƒ‹‚ª‘S‚Ä€‚ñ‚¾‚çTrue</returns>
+	bool IsAllDead();
 	/// <summary>
 	/// cell‚Ìó‘Ô‚ğ•`‰æ‚·‚é
 	/// ¶‘¶:¡ €–S: 
 	/// </summary>
-	void RenderState();
+	void Render();
 
 	std::vector<bool> aliveCells;
 private:

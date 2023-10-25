@@ -7,28 +7,27 @@
 
 using namespace std;
 
-vector<int8_t> InitSetting(int& height, int& width);
+vector<int8_t> SizeSetting(int& height, int& width);
 
 int main()
 {
 	int height;
 	int width;
 	int generationCount = 0;
-	auto initInstance = InitSetting(height, width);
-	vector<int8_t>& initRef = initInstance;
+	vector<int8_t> initArray = SizeSetting(height, width);
 
 	mt19937 mt{ std::random_device{}() };
 	uniform_int_distribution<int> dist(0, 1);
 
-	for (int i = 0; i < initRef.size(); i++)
+	for (int i = 0; i < initArray.size(); i++)
 	{
 		// ランダムに0,1を代入する
-		initRef.at(i) = dist(mt);
-		cout << initRef.at(i);
+		initArray.at(i) = dist(mt);
+		cout << initArray.at(i);
 	}
 
 	LifeGame* lifeGame = new LifeGame(height, width);
-	IntToBool(initRef, height, width, lifeGame->aliveCells);
+	IntToBool(initArray, height, width, lifeGame->aliveCells);
 
 	// 自動で世代を進める
 	while (true)
@@ -36,23 +35,26 @@ int main()
 		// コンソールのクリア
 		system("cls");
 		cout << generationCount << "世代目" << endl;
-		lifeGame->RenderState();
+		lifeGame->Render();
+		if (lifeGame->IsAllDead())break;
 		// 待機
 		Sleep(1000);
-		lifeGame->aliveCells = lifeGame->NextGeneration();
+		lifeGame->NextGeneration();
 		generationCount++;
 	}
 
+	cout << "全滅したので終了";
+	cin.get();
 	delete lifeGame;
 }
 
 /// <summary>
-/// 初期設定
+/// サイズ設定
 /// </summary>
 /// <param name="height">縦</param>
 /// <param name="width">横</param>
 /// <returns>(height*width)</returns>
-vector<int8_t> InitSetting(int& height, int& width)
+vector<int8_t> SizeSetting(int& height, int& width)
 {
 	while (true)
 	{

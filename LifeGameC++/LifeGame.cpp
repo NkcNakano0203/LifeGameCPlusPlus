@@ -1,8 +1,6 @@
 #include "LifeGame.h"
 #include "Parse.hpp"
 
-using namespace std;
-
 LifeGame::LifeGame(const unsigned int heightSize, const unsigned int widthSize)
 {
 	this->heightSize = heightSize;
@@ -13,6 +11,7 @@ LifeGame::LifeGame(const unsigned int heightSize, const unsigned int widthSize)
 
 bool LifeGame::IsAlive(int y, int x)
 {
+	// 周囲の生存しているセルの数
 	int lifeCount = 0;
 
 	// 自分含めた周囲9マスのcellの生存状態を確認する
@@ -25,8 +24,6 @@ bool LifeGame::IsAlive(int y, int x)
 		{
 			// 0 <= j < widthSize
 			if ((unsigned int)j >= widthSize) continue;
-
-			//int index = y * widthSize + x;
 
 			if (!aliveCells.at(PositionToIndex(i, j, widthSize))) continue;
 			lifeCount++;
@@ -47,9 +44,9 @@ bool LifeGame::IsAlive(int y, int x)
 	}
 }
 
-vector<bool> LifeGame::NextGeneration()
+void LifeGame::NextGeneration()
 {
-	vector<bool> newGene(heightSize * widthSize);
+	std::vector<bool> newGene(heightSize * widthSize);
 	for (int y = 0; y < heightSize; y++)
 	{
 		for (int x = 0; x < widthSize; x++)
@@ -57,17 +54,27 @@ vector<bool> LifeGame::NextGeneration()
 			newGene.at(PositionToIndex(y, x, widthSize)) = IsAlive(y, x);
 		}
 	}
-	return newGene;
+	aliveCells = newGene;
 }
 
-void LifeGame::RenderState()
+bool LifeGame::IsAllDead()
+{
+	bool allDead = !IsAlive(0, 0);
+	for (int32_t i = 0; i < aliveCells.size(); i++)
+	{
+		allDead &= !aliveCells.at(i);
+	}
+	return allDead;
+}
+
+void LifeGame::Render()
 {
 	for (int y = 0; y < heightSize; y++)
 	{
 		for (int x = 0; x < widthSize; x++)
 		{
-			cout << (aliveCells.at(PositionToIndex(y, x, widthSize)) ? "■" : "□");
+			std::cout << (aliveCells.at(PositionToIndex(y, x, widthSize)) ? "■" : "□");
 		}
-		cout << "\n";
+		std::cout << "\n";
 	}
 }
