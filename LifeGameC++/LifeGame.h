@@ -7,11 +7,14 @@ class LifeGame
 {
 public:
 	LifeGame(const unsigned int heightSize, const unsigned int widthSize);
+
 	/// <summary>
 	/// ¢‘ã‚ğ‚P‚Âi‚ß‚é
 	/// </summary>
-	/// <returns>Ÿ¢‘ã‚Ìcell‚Ìó‘Ô</returns>
-	std::vector<bool> NextGeneration();
+	/// <param name="cells">Ÿ¢‘ã‚Ìcell‚Ìó‘Ô</param>
+	/// <returns>‘S–Å‚µ‚½‚çFalse</returns>
+	bool TryNextGeneration(std::vector<bool>& cells);
+
 	/// <summary>
 	/// cell‚Ìó‘Ô‚ğ•`‰æ‚·‚é
 	/// ¶‘¶:¡ €–S: 

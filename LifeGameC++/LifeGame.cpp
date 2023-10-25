@@ -1,8 +1,6 @@
 #include "LifeGame.h"
 #include "Parse.hpp"
 
-using namespace std;
-
 LifeGame::LifeGame(const unsigned int heightSize, const unsigned int widthSize)
 {
 	this->heightSize = heightSize;
@@ -47,17 +45,22 @@ bool LifeGame::IsAlive(int y, int x)
 	}
 }
 
-vector<bool> LifeGame::NextGeneration()
+bool LifeGame::TryNextGeneration(std::vector<bool>& cells)
 {
-	vector<bool> newGene(heightSize * widthSize);
+	std::vector<bool> newGene(heightSize * widthSize);
+	bool allDead = !aliveCells.at(PositionToIndex(0, 0, widthSize));
+
 	for (int y = 0; y < heightSize; y++)
 	{
 		for (int x = 0; x < widthSize; x++)
 		{
 			newGene.at(PositionToIndex(y, x, widthSize)) = IsAlive(y, x);
+			allDead &= !aliveCells.at(PositionToIndex(y, x, widthSize));
 		}
 	}
-	return newGene;
+
+	cells = newGene;
+	return allDead;
 }
 
 void LifeGame::RenderState()
@@ -66,8 +69,8 @@ void LifeGame::RenderState()
 	{
 		for (int x = 0; x < widthSize; x++)
 		{
-			cout << (aliveCells.at(PositionToIndex(y, x, widthSize)) ? "¡" : " ");
+			std::cout << (aliveCells.at(PositionToIndex(y, x, widthSize)) ? "¡" : " ");
 		}
-		cout << "\n";
+		std::cout << "\n";
 	}
 }

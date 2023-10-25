@@ -39,9 +39,12 @@ int main()
 		lifeGame->RenderState();
 		// 待機
 		Sleep(1000);
-		lifeGame->aliveCells = lifeGame->NextGeneration();
+		if (lifeGame->TryNextGeneration(lifeGame->aliveCells))break;
 		generationCount++;
 	}
+	cout << "全滅したので終了";
+	char hoge;
+	cin >> hoge;
 
 	delete lifeGame;
 }
