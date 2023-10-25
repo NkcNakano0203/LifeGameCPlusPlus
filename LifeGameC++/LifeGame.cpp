@@ -11,6 +11,7 @@ LifeGame::LifeGame(const unsigned int heightSize, const unsigned int widthSize)
 
 bool LifeGame::IsAlive(int y, int x)
 {
+	// 周囲の生存しているセルの数
 	int lifeCount = 0;
 
 	// 自分含めた周囲9マスのcellの生存状態を確認する
@@ -23,8 +24,6 @@ bool LifeGame::IsAlive(int y, int x)
 		{
 			// 0 <= j < widthSize
 			if ((unsigned int)j >= widthSize) continue;
-
-			//int index = y * widthSize + x;
 
 			if (!aliveCells.at(PositionToIndex(i, j, widthSize))) continue;
 			lifeCount++;
@@ -45,25 +44,30 @@ bool LifeGame::IsAlive(int y, int x)
 	}
 }
 
-bool LifeGame::TryNextGeneration(std::vector<bool>& cells)
+void LifeGame::NextGeneration()
 {
 	std::vector<bool> newGene(heightSize * widthSize);
-	bool allDead = !aliveCells.at(PositionToIndex(0, 0, widthSize));
-
 	for (int y = 0; y < heightSize; y++)
 	{
 		for (int x = 0; x < widthSize; x++)
 		{
 			newGene.at(PositionToIndex(y, x, widthSize)) = IsAlive(y, x);
-			allDead &= !aliveCells.at(PositionToIndex(y, x, widthSize));
 		}
 	}
+	aliveCells = newGene;
+}
 
-	cells = newGene;
+bool LifeGame::IsAllDead()
+{
+	bool allDead = !IsAlive(0, 0);
+	for (int32_t i = 0; i < aliveCells.size(); i++)
+	{
+		allDead &= !aliveCells.at(i);
+	}
 	return allDead;
 }
 
-void LifeGame::RenderState()
+void LifeGame::Render()
 {
 	for (int y = 0; y < heightSize; y++)
 	{

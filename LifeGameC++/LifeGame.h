@@ -7,19 +7,18 @@ class LifeGame
 {
 public:
 	LifeGame(const unsigned int heightSize, const unsigned int widthSize);
-
 	/// <summary>
 	/// 世代を１つ進める
 	/// </summary>
-	/// <param name="cells">次世代のcellの状態</param>
-	/// <returns>全滅したらFalse</returns>
-	bool TryNextGeneration(std::vector<bool>& cells);
-
+	/// <returns>次世代のcellの状態</returns>
+	void NextGeneration();
+	/// <returns>セルが全て死んだらTrue</returns>
+	bool IsAllDead();
 	/// <summary>
 	/// cellの状態を描画する
 	/// 生存:■ 死亡:□
 	/// </summary>
-	void RenderState();
+	void Render();
 
 	std::vector<bool> aliveCells;
 private:
