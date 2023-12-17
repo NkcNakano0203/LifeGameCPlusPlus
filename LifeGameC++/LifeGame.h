@@ -7,13 +7,16 @@ class LifeGame
 {
 public:
 	LifeGame(const unsigned int heightSize, const unsigned int widthSize);
+
 	/// <summary>
 	/// ¢‘ã‚ğ‚P‚Âi‚ß‚é
 	/// </summary>
 	/// <returns>Ÿ¢‘ã‚Ìcell‚Ìó‘Ô</returns>
 	void NextGeneration();
+
 	/// <returns>ƒZƒ‹‚ª‘S‚Ä€‚ñ‚¾‚çTrue</returns>
 	bool IsAllDead();
+
 	/// <summary>
 	/// cell‚Ìó‘Ô‚ğ•`‰æ‚·‚é
 	/// ¶‘¶:¡ €–S: 
@@ -32,4 +35,5 @@ private:
 
 	unsigned int heightSize;
 	unsigned int widthSize;
+	unsigned int generationCount = 0;
 };

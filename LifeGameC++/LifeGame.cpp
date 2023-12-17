@@ -55,6 +55,7 @@ void LifeGame::NextGeneration()
 		}
 	}
 	aliveCells = newGene;
+	generationCount++;
 }
 
 bool LifeGame::IsAllDead()
@@ -69,6 +70,9 @@ bool LifeGame::IsAllDead()
 
 void LifeGame::Render()
 {
+	// コンソールのクリア
+	system("cls");
+	std::cout << generationCount << "世代目" << std::endl;
 	for (int y = 0; y < heightSize; y++)
 	{
 		for (int x = 0; x < widthSize; x++)

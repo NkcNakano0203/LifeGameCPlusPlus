@@ -32,19 +32,15 @@ int main()
 	// 自動で世代を進める
 	while (true)
 	{
-		// コンソールのクリア
-		system("cls");
-		cout << generationCount << "世代目" << endl;
 		lifeGame->Render();
 		if (lifeGame->IsAllDead())break;
 		// 待機
 		Sleep(1000);
 		lifeGame->NextGeneration();
-		generationCount++;
 	}
 
-	cout << "全滅したので終了";
-	cin.get();
+	cout << "全滅したので終了"<<endl;
+	system("pause");
 	delete lifeGame;
 }
 
