@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <random>
+#include <memory>
 #include "Parse.hpp"
 #include "LifeGame.h"
 
@@ -26,14 +27,14 @@ int main()
 		cout << initArray.at(i);
 	}
 
-	LifeGame* lifeGame = new LifeGame(height, width);
+	unique_ptr<LifeGame> lifeGame = make_unique<LifeGame>(height, width);
 	IntToBool(initArray, height, width, lifeGame->aliveCells);
 
 	// 自動で世代を進める
 	while (true)
 	{
 		lifeGame->Render();
-		if (lifeGame->IsAllDead())break;
+		if (lifeGame->IsAllDead()) break;
 		// 待機
 		Sleep(1000);
 		lifeGame->NextGeneration();
@@ -41,7 +42,6 @@ int main()
 
 	cout << "全滅したので終了"<<endl;
 	system("pause");
-	delete lifeGame;
 }
 
 /// <summary>
